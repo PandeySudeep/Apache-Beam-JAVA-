@@ -1,0 +1,31 @@
+pipeline {
+  agent {
+    label "dibi-batch-pod"
+  }
+  stages {
+    stage('checkout') {
+      steps {
+        checkout scm
+      }
+    }
+    stage('compile') {
+      steps {
+        container('mvn3jdk8') {	
+		withSonarQubeEnv('sonarQube') {
+            configFileProvider(
+              [configFile(fileId: "defaultMVNSettings", variable: 'MAVEN_SETTINGS')])
+              {
+				sh "mvn -Pdataflow-runner clean package -s $MAVEN_SETTINGS"
+                sh "mvn sonar:sonar -s $MAVEN_SETTINGS"
+              }            
+			}
+		}
+      }
+    }
+  }
+  post {
+    always {
+      deleteDir ()
+    }
+  }
+}

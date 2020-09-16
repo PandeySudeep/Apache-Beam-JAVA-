@@ -1,0 +1,16 @@
+mvn -Pdirect-runner compile exec:java -Dexec.mainClass=com.equifax.creditsafe.pipeline.CreditSafeBatchPipeline 
+-Dexec.args=
+			
+		   "--runner=DirectRunner 
+			--inputPath=C:/Users/sxp630/Desktop/CreditSafe/DICSAFE-CREDITSAFE_COMMERCIALDATA_20190105.txt
+			--inputSSARespPath=C:/Users/sxp630/Desktop/CreditSafe/inputSSA.txt
+			--SSAFileName=inputSSA.txt
+			--SSAFilePath=C:/Users/sxp630/Desktop/CreditSafe/
+			--SSADestFileName=outputSSA.txt
+			--SSADestFilePath=C:/Users/sxp630/Desktop/CreditSafe/
+			--serviceURL=http://10.149.16.3:8080/ic-ssa-wrapper-service/batch/search/ssa
+			--encryptionRequired=false
+			--pgpCryptionEnabled=false"
+				
+
+
